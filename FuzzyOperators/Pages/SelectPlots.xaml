@@ -1,0 +1,55 @@
+﻿<Page x:Class="FuzzyOperators.Pages.SelectPlots"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:c="clr-namespace:FuzzyOperators.Controls"
+      xmlns:model="clr-namespace:FuzzyOperators.Models"
+      xmlns:local="clr-namespace:FuzzyOperators.Pages" FlowDirection="RightToLeft" Background="White"
+      mc:Ignorable="d"  FontFamily="{StaticResource Fonts.IRANSans}"
+      d:DesignHeight="400" d:DesignWidth="800"
+      >
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="12">یک یا دو نمودار را برای بررسی عملگر انتخاب کرده و سپس روی دکمه روبرو کلیک کنید:</TextBlock>
+            <Button Grid.Column="1" BorderThickness="0 0 0 3" Margin="8" Padding="10 0" HorizontalAlignment="Right" Click="Button_Click">ورود به مرحله انتخاب عملگر</Button>
+        </Grid>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="wrapPanel" HorizontalAlignment="Center" Margin="10" FlowDirection="RightToLeft"
+                   Orientation="Horizontal">
+                <i:Interaction.Behaviors>
+                    <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.5">
+                        <ei:FluidMoveBehavior.EaseY>
+                            <QuadraticEase EasingMode="EaseInOut" />
+                        </ei:FluidMoveBehavior.EaseY>
+                        <ei:FluidMoveBehavior.EaseX>
+                            <QuadraticEase EasingMode="EaseInOut" />
+                        </ei:FluidMoveBehavior.EaseX>
+                    </ei:FluidMoveBehavior>
+                </i:Interaction.Behaviors>
+
+                <c:PlotDetails Height="300" Width="350" Title="تابع مثلثی" Margin="10" x:Name="tri" Loaded="Tri_Loaded" Tag="Tri"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع مثلثی معکوس" Margin="10" x:Name="triRev" Loaded="TriRev_Loaded" Tag="TriRev"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع ذوزنقه" Margin="10" x:Name="trap" Loaded="Trap_Loaded" Tag="Trap"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع ذوزنقه معکوس" Margin="10" x:Name="trapRev" Loaded="TrapRev_Loaded" Tag="TrapRev"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع منطقی" Margin="10" x:Name="log" Loaded="Log_Loaded" Tag="Log"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع منطقی معکوس" Margin="10" x:Name="logRev" Loaded="LogRev_Loaded" Tag="LogRev"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع گاوسی" Margin="10" x:Name="guass" Loaded="Guass_Loaded" Tag="Gauss"/>
+                <c:PlotDetails Height="300" Width="350" Title="تابع گاوسی معکوس" Margin="10" x:Name="guassRev" Loaded="GuassRev_Loaded" Tag="GaussRev"/>
+
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

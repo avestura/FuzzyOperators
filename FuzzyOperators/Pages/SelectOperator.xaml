@@ -1,0 +1,130 @@
+﻿<Page x:Class="FuzzyOperators.Pages.SelectOperator"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FuzzyOperators.Pages" Loaded="Page_Loaded"
+      xmlns:math="clr-namespace:WpfMath.Controls;assembly=WpfMath"
+      mc:Ignorable="d" Background="White" FlowDirection="RightToLeft" FontFamily="{StaticResource Fonts.IRANSans}"
+      d:DesignHeight="2000" d:DesignWidth="800"
+      Title="SelectOperator">
+
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" FlowDirection="RightToLeft">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="12">عملگری را برای بررسی انتخاب کنید:</TextBlock>
+            <Button Grid.Column="1" BorderThickness="0 0 0 3" Margin="8" Click="Button_Click" Padding="10 0" HorizontalAlignment="Right">نمایش نتیجه</Button>
+        </Grid>
+        <ScrollViewer FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Auto" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+
+            <StackPanel TextBlock.FontFamily="Times New Roman" TextBlock.FontSize="18"  FlowDirection="LeftToRight" Margin="10">
+                <Border Padding="10" BorderBrush="DarkGray" BorderThickness="3 0 0 0" Background="#FFF3F3F3">
+                <TextBlock FontSize="20">T-Norms:</TextBlock>
+            </Border>
+
+            <StackPanel Margin="10 0 0 0" >
+                <RadioButton x:Name="defaultCheck" VerticalContentAlignment="Center" IsChecked="True" Tag="TNormMin" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="min\left{\mu A(x), \mu B(x)\right}, \forall x \in X "/>
+                        <TextBlock><Italic Foreground="Gray">(Min Operator)</Italic></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNormProduct" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\mu A(x) \mu B(x), \forall x \in X "/>
+                        <TextBlock><Italic Foreground="Gray">(Product Operator)</Italic></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNorm1" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\frac{1}{1 + \sqrt[p]{({\frac{1-\mu A(x)}{p})}^p} + ({\frac{1-\mu B(x)}{p})}^p}, for\; p > 0"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNorm2" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="max\left{0, (1+p)(\mu A(x) + \mu B(x) - 1) - p \mu A(x)\mu B(x) \right},\; for\; p \geq -1"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNorm3" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\frac{\mu A(x)\mu B(x)}{p + (1-p)(\mu A(x) + \mu B(x) - \mu A(x) \mu B(x))}, for\; p > 0"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNorm4" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\frac{1}{\sqrt[p]{\frac{1}{(\mu A(x))^p} + \frac{1}{(\mu B(x))^p}-1 }}"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNorm5" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\frac{\mu A(x) \mu B(x)}{max \left{\mu A(x) \mu B(x), p\right}}, for\; p \in [0, 1]"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="TNorm6" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="p \times min\left{\mu A(x), \mu B(x)\right} + (1 - p) \times \frac{1}{2}  (\mu A(x) + \mu B(x)), where\;p \in [0, 1]"/>
+                    </StackPanel>
+                </RadioButton>
+                
+            </StackPanel>
+
+            <Border Padding="10" BorderBrush="DarkGray" BorderThickness="3 0 0 0" Background="#FFF3F3F3">
+                <TextBlock FontSize="20">S-Norms:</TextBlock>
+            </Border>
+            <StackPanel Margin="10 0 0 0" >
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNormMax" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="max\left{\mu A(x), \mu B(x)\right}, \forall x \in X "/>
+                        <TextBlock><Italic Foreground="Gray">(Max Operator)</Italic></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNormSummation" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\mu A(x)+ \mu B(x) - \mu A(x)\mu B(x), \forall x \in X "/>
+                        <TextBlock><Italic Foreground="Gray">(Summation Operator)</Italic></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNorm1" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\frac{1}{1 + \sqrt[p]{({\frac{\mu A(x)}{1-\mu A(x)})}^p} + ({\frac{\mu B(x)}{1-\mu B(x)})}^p}, for\; p > 0"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNorm2" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="min\left{1, \mu A(x) + \mu B(x) + p \mu A(x)\mu B(x) \right},\; for\; p \geq 0"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNorm3" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="\frac{\mu A(x)+\mu B(x)-\mu A(x)\mu B(x) - (1-p)\mu A(x) \mu B(x)}{1 - (1-p)\mu A(x)\mu B(x)}, for\; p \geq 0"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNorm4" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="1 - \frac{1}{\sqrt[p]{\frac{1}{(1 - \mu A(x))^p} + \frac{1}{(1 - \mu B(x))^p}-1 }}"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNorm5" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="1 - \frac{(1 - \mu A(x)) (1 - \mu B(x))}{max \left{(1 - \mu A(x))(1 - \mu B(x)), p\right}}, for\; P \in [0, 1]"/>
+                    </StackPanel>
+                </RadioButton>
+                    <RadioButton VerticalContentAlignment="Center" Tag="SNorm6" Checked="RadioButton_Checked">
+                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                        <math:FormulaControl Formula="p \times max\left{\mu A(x), \mu B(x)\right} + (1 - p) \times \frac{1}{2} (\mu A(x) + \mu B(x)), where\;p \in [0, 1]"/>
+                    </StackPanel>
+                </RadioButton>
+
+            </StackPanel>
+        </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

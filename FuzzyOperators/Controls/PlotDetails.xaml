@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="FuzzyOperators.Controls.PlotDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FuzzyOperators.Controls" Loaded="UserControl_Loaded"
+             xmlns:plot="http://oxyplot.org/wpf"
+             mc:Ignorable="d" Background="White" FlowDirection="RightToLeft"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="0">
+    <Grid>
+        <Grid Background="White" >
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="10" RenderingBias="Quality" Color="#FFA3A3A3"/>
+            </Grid.Effect>
+        </Grid>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                    <Border BorderBrush="{Binding HeaderBorder}" BorderThickness="0 0 0 1" Background="{Binding HeaderBackground}">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <CheckBox Tag="{Binding Path=FuncName, RelativeSource={RelativeSource AncestorType={x:Type local:PlotDetails}}}" x:Name="check" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" VerticalAlignment="Center" Content="{Binding Title}" Style="{DynamicResource WhiteCheckbox}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="1" Margin="10">
+                    <plot:PlotView FlowDirection="LeftToRight" x:Name="MainPlotView" Model="{Binding PlotViewModel}" />
+                </Grid>
+        </Grid>
+    </Grid>
+    </Border>
+</UserControl>

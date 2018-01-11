@@ -1,0 +1,52 @@
+﻿<Page x:Class="FuzzyOperators.Pages.ResultView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:plot="http://oxyplot.org/wpf"
+      xmlns:math="clr-namespace:WpfMath.Controls;assembly=WpfMath"
+      xmlns:local="clr-namespace:FuzzyOperators.Pages"
+      mc:Ignorable="d" Background="White" FontFamily="{StaticResource Fonts.IRANSans}"
+      d:DesignHeight="650" d:DesignWidth="1000" FlowDirection="RightToLeft"
+      Title="ResultView">
+    <ScrollViewer FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" FlowDirection="RightToLeft">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="12">نتیجه مورد نظر:</TextBlock>
+                <Button Grid.Column="1" BorderThickness="0 0 0 3" Margin="8" Click="Button_Click"  Padding="10 0" HorizontalAlignment="Right">بازگشت به صفحه انتخاب نمودار</Button>
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <plot:PlotView x:Name="MainPlotView" Margin="0 0 0 10" Model="{Binding PlotModel}" />
+            </Grid>
+            <math:FormulaControl Grid.Row="2" Formula="{Binding LatexString}" Margin="10"/>
+            <Grid Grid.Row="3" FlowDirection="RightToLeft">
+
+                
+                <Grid Background="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="20">مقدار p را تنظیم کنید</TextBlock>
+                        <TextBlock x:Name="SlideText" VerticalAlignment="Center" Margin="5 0 0 0" FontSize="20">(p = default)</TextBlock>
+                    </StackPanel>
+
+                    <Slider IsEnabled="{Binding TrackEnable}" x:Name="slider" FlowDirection="LeftToRight" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center" Value="{Binding P}" Margin="10 0"  Minimum="{Binding TrackMin}" Maximum="{Binding TrackMax}" Grid.Column="1" Foreground="#FF979797" TickPlacement="BottomRight"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>
