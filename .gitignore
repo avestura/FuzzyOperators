@@ -259,3 +259,10 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# IRANSans Font (Commercial Font)
+/FuzzyOperators/Resources/Fonts/IranSans/IRANSans.ttf
+/FuzzyOperators/Resources/Fonts/IranSans/IRANSans_Bold.ttf
+/FuzzyOperators/Resources/Fonts/IranSans/IRANSans_Light.ttf
+/FuzzyOperators/Resources/Fonts/IranSans/IRANSans_Medium.ttf
+/FuzzyOperators/Resources/Fonts/IranSans/IRANSans_UltraLight.ttf
