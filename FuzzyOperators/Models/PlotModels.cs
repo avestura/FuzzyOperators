@@ -102,11 +102,7 @@ namespace FuzzyOperators.Models
 
         public static double GaussianFunction(double x)
         {
-            double e(double j) => j;
-            Func<double, double> k = e;
-
             var formula = Math.Pow(Math.E, ( Math.Pow(x - 20, 2) ) / ( -2f * 36 ));
-
             return formula;
         }
 
