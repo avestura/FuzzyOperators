@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,7 +25,7 @@ namespace FuzzyOperators.Controls
     /// </summary>
     public partial class PlotDetails : UserControl
     {
-        PlotDetailsViewModel details = new PlotDetailsViewModel();
+        private readonly PlotDetailsViewModel details = new PlotDetailsViewModel();
 
         private Color HeaderBackgroundUnchecked = (Color)ColorConverter.ConvertFromString("#dee1e2");
         private Color HeaderBorderUnchecked = (Color)ColorConverter.ConvertFromString("#cacdce");
@@ -48,32 +49,26 @@ namespace FuzzyOperators.Controls
 
         public string Title { get { return details.Title; } set { details.Title = value; } }
 
-
-
         public PlotModel PlotModel
         {
             get { return details.PlotViewModel; }
             set { details.PlotViewModel = value; }
         }
- 
-
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-             HeaderBackgroundUncheckedBrush = new SolidColorBrush(HeaderBackgroundUnchecked);
-             HeaderBorderUncheckedBrush = new SolidColorBrush(HeaderBorderUnchecked);
-             HeaderBackgroundCheckedBrush = new SolidColorBrush(HeaderBackgroundChecked);
-             HeaderBorderCheckedBrush = new SolidColorBrush(HeaderBorderChecked);
+            HeaderBackgroundUncheckedBrush = new SolidColorBrush(HeaderBackgroundUnchecked);
+            HeaderBorderUncheckedBrush = new SolidColorBrush(HeaderBorderUnchecked);
+            HeaderBackgroundCheckedBrush = new SolidColorBrush(HeaderBackgroundChecked);
+            HeaderBorderCheckedBrush = new SolidColorBrush(HeaderBorderChecked);
 
-             details.HeaderBackground = HeaderBackgroundUncheckedBrush;
-             details.HeaderBorder = HeaderBorderUncheckedBrush;
-
+            details.HeaderBackground = HeaderBackgroundUncheckedBrush;
+            details.HeaderBorder = HeaderBorderUncheckedBrush;
 
             var plotController = new PlotController();
             plotController.UnbindMouseWheel();
 
             MainPlotView.Controller = plotController;
-
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -89,37 +84,40 @@ namespace FuzzyOperators.Controls
         }
     }
 
-    class PlotDetailsViewModel : INotifyPropertyChanged
+    internal class PlotDetailsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Brush headerBackground = new SolidColorBrush();
-        private Brush headerBorder     = new SolidColorBrush();
+        private Brush headerBorder = new SolidColorBrush();
         private string title = "";
         private PlotModel plotModel;
 
-        public Brush HeaderBackground {
+        public Brush HeaderBackground
+        {
             get { return headerBackground; }
-            set { headerBackground = value; OnPropertyChanged("HeaderBackground"); }
+            set { headerBackground = value; OnPropertyChanged(); }
         }
-        public Brush HeaderBorder {
+
+        public Brush HeaderBorder
+        {
             get { return headerBorder; }
-            set { headerBorder = value; OnPropertyChanged("HeaderBorder"); }
+            set { headerBorder = value; OnPropertyChanged(); }
         }
 
         public string Title
         {
             get { return title; }
-            set { title = value; OnPropertyChanged("Title"); }
+            set { title = value; OnPropertyChanged(); }
         }
 
-        public PlotModel PlotViewModel {
+        public PlotModel PlotViewModel
+        {
             get { return plotModel; }
-            set { plotModel = value; OnPropertyChanged("PlotViewModel"); }
-
+            set { plotModel = value; OnPropertyChanged(); }
         }
 
-        public void OnPropertyChanged(string propName)
+        public void OnPropertyChanged([CallerMemberName]string propName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }

@@ -45,8 +45,6 @@ namespace FuzzyOperators.Pages
                 );
 
             MainPlotView.InvalidatePlot(true);
-
-
         }
     }
 }

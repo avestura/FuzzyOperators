@@ -34,16 +34,15 @@ namespace FuzzyOperators
         {
             DataContext = new PlotModels();
             MainFrame.Navigate(new SelectPlots());
-
-            
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            try
-            {
-                MainFrame.MarginFadeInAnimation(new Thickness(0), new Thickness(20, 0, 0, 0), TimeSpan.FromMilliseconds(500));
-            } catch (Exception ex) { /*MessageBox.Show(ex.Message); */}
+            MainFrame.MarginFadeInAnimation(
+                from:     new Thickness(0),
+                to:       new Thickness(20, 0, 0, 0),
+                duration: TimeSpan.FromMilliseconds(500)
+                );
         }
     }
 }

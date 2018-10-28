@@ -40,14 +40,10 @@ namespace FuzzyOperators.Pages
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var radio = (RadioButton)sender;
-            var tagData = (string)(radio.Tag);
-
-            if (tagData == null)
-                tagData = "TNormMin";
+            string tagData = (string)(radio.Tag) ?? "TNormMin";
 
             funcChosen = tagData;
             ResultFunc = App.ResultFunc(tagData);
-     
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

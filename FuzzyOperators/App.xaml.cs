@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,18 +21,21 @@ namespace FuzzyOperators
     {
 
 #if !DEBUG
-        App() : base()
+        App()
         {
             // Splash delay
             System.Threading.Thread.Sleep(2000);
         }
 #endif
 
-        public static App GetApp() { return ( (App)Current ); }
-        public static MainWindow GetMainWindow() { return ( (MainWindow)GetApp().MainWindow ); }
+        public static App GetApp() => (App)Current;
+
+        public static MainWindow GetMainWindow() => (MainWindow)GetApp().MainWindow;
 
         public ResultViewModel ResultModel { get; set; } = new ResultViewModel();
+
         public FuncManager FuncManager { get; set; } = new FuncManager();
+
         public string FuncChosen { get; set; }
 
         public void Reset()
@@ -62,7 +66,6 @@ namespace FuzzyOperators
                 App.GetApp().ResultModel.TrackEnable = true;
                 App.GetApp().ResultModel.TrackMin = 0.1;
                 App.GetApp().ResultModel.TrackMax = 2.5;
-
 
             } else if (funcName == "TNorm2")
             {
@@ -125,7 +128,6 @@ namespace FuzzyOperators
                 App.GetApp().ResultModel.TrackMin = 0.01;
                 App.GetApp().ResultModel.TrackMax = 100;
 
-
             } else if (funcName == "SNorm2")
             {
                 App.GetApp().ResultModel.LatexString = @"min\left{1, \mu A(x) + \mu B(x) + p \mu A(x)\mu B(x) \right},\; for\; p \geq 0";
@@ -142,7 +144,6 @@ namespace FuzzyOperators
                 App.GetApp().ResultModel.TrackMin = 0;
                 App.GetApp().ResultModel.TrackMax = 100;
 
-
             } else if (funcName == "SNorm4")
             {
                 App.GetApp().ResultModel.LatexString = @"1 - \frac{1}{\sqrt[p]{\frac{1}{(1 - \mu A(x))^p} + \frac{1}{(1 - \mu B(x))^p}-1 }}";
@@ -150,7 +151,6 @@ namespace FuzzyOperators
 
                 App.GetApp().ResultModel.TrackMin = 0;
                 App.GetApp().ResultModel.TrackMax = 80;
-
 
             } else if (funcName == "SNorm5")
             {
@@ -182,103 +182,77 @@ namespace FuzzyOperators
 
             if (funcName == "TNormMin")
             {
-
                 double Func(double x) => Math.Min(func1(x), func2(x));
-
                 return Func;
 
             } else if (funcName == "TNormProduct")
             {
-
                 double Func(double x) => func1(x) * func2(x);
-
                 return Func;
 
             } else if (funcName == "TNorm1")
             {
-
                 return NormFunctions.TNorm1;
 
             } else if (funcName == "TNorm2")
             {
-
                 return  NormFunctions.TNorm2;
 
             } else if (funcName == "TNorm3")
             {
-
                 return NormFunctions.TNorm3;
 
             } else if (funcName == "TNorm4")
             {
-
                 return NormFunctions.TNorm4;
 
             } else if (funcName == "TNorm5")
             {
-
                 return NormFunctions.TNorm5;
 
             } else if (funcName == "TNorm6")
             {
-
                 return NormFunctions.TNorm6;
 
             } else if (funcName == "SNormMax")
             {
-
                 double Func(double x) => Math.Max(func1(x), func2(x));
-
                 return Func;
 
             } else if (funcName == "SNormSummation")
             {
-
                 double Func(double x) => func1(x) + func2(x) - ( func1(x) * func2(x) );
-
                 return Func;
 
             } else if (funcName == "SNorm1")
             {
-
                 return NormFunctions.SNorm1;
-
 
             } else if (funcName == "SNorm2")
             {
-
                 return NormFunctions.SNorm2;
 
             } else if (funcName == "SNorm3")
             {
-
                 return NormFunctions.SNorm3;
 
             } else if (funcName == "SNorm4")
             {
-
                 return NormFunctions.SNorm4;
 
             } else if (funcName == "SNorm5")
             {
-
                 return NormFunctions.SNorm5;
 
             } else if (funcName == "SNorm6")
             {
-
                 return NormFunctions.SNorm6;
 
             }
 
-            return null; 
+            return null;
         }
 
-        private async void Application_Startup(object sender, StartupEventArgs e)
-        {
-            // Delay Startup for Splash
-            
-        }
     }
 
     public class FuncManager
@@ -297,6 +271,7 @@ namespace FuzzyOperators
                 return null;
             }
         }
+
         public Func<double, double> Function2 {
             get
             {
@@ -313,7 +288,6 @@ namespace FuzzyOperators
             }
         }
 
-
         private Func<double, double> TranslateNameToFunc(string name)
         {
             if (name == "Gaussian") return PlotModels.GaussianFunction;
@@ -325,11 +299,8 @@ namespace FuzzyOperators
             if (name == "Logistic") return PlotModels.LogisticFunction;
             if (name == "Logistic Reversed") return PlotModels.LogisticReversedFunction;
             return null;
-
         }
-
     }
-
 
     public class ResultViewModel : INotifyPropertyChanged
     {
@@ -342,47 +313,44 @@ namespace FuzzyOperators
         private double _trackMin = 0;
         private double _trackMax = 1;
 
-
         public PlotModel PlotModel
         {
-            get { return _plotModel; }
-            set { _plotModel = value; OnPropertyChanged("PlotModel"); }
+            get => _plotModel;
+            set { _plotModel = value; OnPropertyChanged(); }
         }
 
         public bool TrackEnable
         {
-            get { return trackEnable; }
-            set { trackEnable = value; OnPropertyChanged("TrackEnable"); }
+            get => trackEnable;
+            set { trackEnable = value; OnPropertyChanged(); }
         }
 
         public string LatexString
         {
-            get { return _latexString; }
-            set { _latexString = value; OnPropertyChanged("LatexString"); }
+            get => _latexString;
+            set { _latexString = value; OnPropertyChanged(); }
 
         }
 
         public double P
         {
-            get { return _p; }
-            set { _p = value; OnPropertyChanged("P"); }
-
+            get => _p;
+            set { _p = value; OnPropertyChanged(); }
         }
 
         public double TrackMin
         {
-            get { return _trackMin; }
-            set { _trackMin = value; OnPropertyChanged("TrackMin"); }
+            get => _trackMin;
+            set { _trackMin = value; OnPropertyChanged(); }
         }
 
         public double TrackMax
         {
-            get { return _trackMax; }
-            set { _trackMax = value; OnPropertyChanged("TrackMax"); }
+            get => _trackMax;
+            set { _trackMax = value; OnPropertyChanged(); }
         }
 
-
-        public void OnPropertyChanged(string propName)
+        public void OnPropertyChanged([CallerMemberName]string propName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }

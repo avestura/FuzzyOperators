@@ -24,7 +24,6 @@ namespace FuzzyOperators
                 By = ( from + to ) / 2
             };
             image.BeginAnimation(ImageAwesome.SpinDurationProperty, anim);
-
         }
 
         public static void MarginFadeInAnimation(this FrameworkElement element, Thickness from, Thickness to, TimeSpan? duration = null, bool useFade = true, bool makeVisible = true)
@@ -101,7 +100,6 @@ namespace FuzzyOperators
                     EasingFunction = new QuadraticEase()
                 };
 
-
                 Storyboard.SetTarget(fadeAnim, element);
                 Storyboard.SetTargetProperty(fadeAnim, new PropertyPath(UIElement.OpacityProperty));
 
@@ -109,7 +107,6 @@ namespace FuzzyOperators
             }
 
             element.BeginStoryboard(storyboard);
-
         }
 
         #region Animation :: Show And Fade
@@ -130,9 +127,6 @@ namespace FuzzyOperators
             element.Opacity = 1;
             element.Visibility = Visibility.Visible;
             element.BeginAnimation(UIElement.OpacityProperty, anim);
-
-
-
         }
 
         public static void ShowUsingLinearAnimation(this UIElement element, int milliSeconds = 500)
@@ -148,7 +142,6 @@ namespace FuzzyOperators
             element.Opacity = 0;
             element.Visibility = Visibility.Visible;
             element.BeginAnimation(UIElement.OpacityProperty, anim);
-
         }
 
         public static Task HideUsingLinearAnimationAsync(this UIElement element, int milliSeconds = 500)

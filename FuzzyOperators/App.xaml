@@ -1,19 +1,17 @@
 ﻿<Application x:Class="FuzzyOperators.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:FuzzyOperators" Startup="Application_Startup"
+             xmlns:local="clr-namespace:FuzzyOperators"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
 
                 <!--#region Fonts-->
                 <ResourceDictionary Source="pack://application:,,,/FuzzyOperators;component/Resources/Fonts/FontsDictionary.xaml" />
                 <!--#endregion-->
 
                 <ResourceDictionary Source="pack://application:,,,/FuzzyOperators;component/Resources/Templates/CheckboxWhiteTemplate.xaml" />
-
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
